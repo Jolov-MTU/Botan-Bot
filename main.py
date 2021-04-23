@@ -9,10 +9,23 @@ from waiting import wait
 
 # Command Aliases
 squidwardDaBabyAlias = ["squidbaby", "squidwardbaby", "dababy"]
+havefunnekuAlias = ["havefun"]
+joshuaRIPAlias = ["rip", "restinpeace", "joshuarestinpeace"]
+outofyourvectorAlias = ["youreoutofyourvector", "outofvector", "vector"]
+sincostanAlias = ["sinecosinetangent"]
+sozettaslowAlias = ["zettaslow"]
+beatdumbassAlias = ["dumbass"]
+bwahAlias = ["daisukenojobito"]
 
 # Sound urls
 squidwardDaBabyURL = "https://youtu.be/fzhDGZD44hE"
-
+havefunnekuURL = "https://youtu.be/8Z-3UZwJMBA"
+joshuaRIPURL = "https://youtu.be/EjRbKVYnaa4"
+outofyourvectorURL = "https://youtu.be/xcBWIAD6FHA"
+sincostanURL = "https://youtu.be/BTABSE7kP8o"
+sozettaslowURL = "https://youtu.be/daZcE-4mprk"
+beatdumbassURL = "https://youtu.be/jUkUDgpIRJc"
+bwahURL = "https://youtu.be/pvkx4HIvEyU"
 
 # Suppress noise about console usage from errors
 youtube_dl.utils.bug_reports_message = lambda: ''
@@ -72,14 +85,6 @@ class Music(commands.Cog):
 
 		await channel.connect()
 
-	# Plays a file from the local filesystem
-	@commands.command()
-	async def play(self, ctx, *, query):
-		source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(query))
-		ctx.voice_client.play(source, after=lambda e: print('Player error: %s' %e) if e else None)
-
-		await ctx.send('Now playing: {}'.format(query))
-
 	# Change player volume
 	@commands.command()
 	async def volume(self, ctx, volume: int):
@@ -89,9 +94,25 @@ class Music(commands.Cog):
 		ctx.voice_cleint.source.volume = volume / 100
 		await ctx.send("Changed volume to {}%".format(volume))
 
+	#@play.before_invoke
+	#@stream.before_invoke
+	async def ensure_voice(self, ctx):
+		if ctx.voice_client is None:
+			if ctx.author.voice:
+				await ctx.author.voice.channel.connect()
+			else:
+				await ctx.send("You're not in a voice channel, puhi")
+				raise commands.CommandError("Author not connected to a voice channel.")
+		elif ctx.voice_client.is_playing():
+			await ctx.send("I'm already playing something, puhi")
+			return True
+		return False
+
 	# Streams from a url
 	@commands.command()
 	async def stream(self, ctx, *, url):
+		alreadyPlaying = await self.ensure_voice(ctx)
+		if(alreadyPlaying): pass	# If something is already playing, dont play the sound
 		async with ctx.typing():
 			player = await YTDLSource.from_url(url, loop=self.bot.loop, stream=True)
 			ctx.voice_client.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
@@ -103,30 +124,43 @@ class Music(commands.Cog):
 
 		await ctx.voice_client.disconnect()
 
-	@commands.command(aliases=squidwardDaBabyAlias)
-	async def squidwardDaBaby(self, ctx):
-		await ctx.invoke(self.bot.get_command('stream'), url = squidwardDaBabyURL)
+	async def playsound(self, ctx, url = str):
+		await ctx.invoke(self.bot.get_command('stream'), url = url)
 		while(ctx.voice_client.is_playing()):
 			await asyncio.sleep(1)
 		await ctx.voice_client.disconnect()
 
-	@play.before_invoke
-	@stream.before_invoke
-	@squidwardDaBaby.before_invoke
-	async def ensure_voice(self, ctx):
-		if ctx.voice_client is None:
-			if ctx.author.voice:
-				await ctx.author.voice.channel.connect()
-			else:
-				await ctx.send("You're not in a voice channel, puhi")
-				raise commands.CommandError("Author not connected to a voice channel.")
-		elif ctx.voice_client.is_playing():
-			await ctx.send("I'm already playing something, puhi")
+	@commands.command(aliases=squidwardDaBabyAlias)
+	async def squidwardDaBaby(self, ctx):
+		await self.playsound(ctx, squidwardDaBabyURL)
 
+	@commands.command(aliases=havefunnekuAlias)
+	async def havefunneku(self, ctx):
+		await self.playsound(ctx, havefunnekuURL)
 
+	@commands.command(aliases=joshuaRIPAlias)
+	async def joshuaRIP(self, ctx):
+		await self.playsound(ctx, joshuaRIPURL)
 
+	@commands.command(aliases=outofyourvectorAlias)
+	async def outOfYourVector(self, ctx):
+		await self.playsound(ctx, outofyourvectorURL)
 
+	@commands.command(aliases=sincostanAlias)
+	async def sinCosTan(self, ctx):
+		await self.playsound(ctx, sincostanURL)
 
+	@commands.command(aliases=sozettaslowAlias)
+	async def soZettaSlow(self, ctx):
+		await self.playsound(ctx, sozettaslowURL)
+
+	@commands.command(aliases=beatdumbassAlias)
+	async def beatDumbass(self, ctx):
+		await self.playsound(ctx, beatdumbassURL)
+
+	@commands.command(aliases=bwahAlias)
+	async def bwah(self, ctx):
+		await self.playsound(ctx, bwahURL)
 
 bot = commands.Bot(command_prefix = commands.when_mentioned_or("~"), description = 'Plays cool sounds, puhi', case_insensitive=True)
 
