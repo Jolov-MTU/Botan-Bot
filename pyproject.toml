@@ -9,6 +9,7 @@ python = "^3.8"
 discord = "^1.0.1"
 youtube-dl = "^2021.4.17"
 waiting = "^1.4.1"
+replit = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 

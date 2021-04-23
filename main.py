@@ -5,7 +5,6 @@ import asyncio
 import youtube_dl
 
 from discord.ext import commands
-from waiting import wait
 
 # Command Aliases
 squidwardDaBabyAlias = ["squidbaby", "squidwardbaby", "dababy"]
@@ -26,6 +25,18 @@ sincostanURL = "https://youtu.be/BTABSE7kP8o"
 sozettaslowURL = "https://youtu.be/daZcE-4mprk"
 beatdumbassURL = "https://youtu.be/jUkUDgpIRJc"
 bwahURL = "https://youtu.be/pvkx4HIvEyU"
+
+# Command Reference DB
+commandRefDict = {
+	"squidwardDaBaby" : squidwardDaBabyAlias,
+	"havefunneku" : havefunnekuAlias,
+	"joshuaRIP" : joshuaRIPAlias,
+	"outofyourvector" : outofyourvectorAlias,
+	"sincostan" : sincostanAlias,
+	"sozettaslow" : sozettaslowAlias,
+	"beatdumbass" : beatdumbassAlias,
+	"bwah" : bwahAlias
+}
 
 # Suppress noise about console usage from errors
 youtube_dl.utils.bug_reports_message = lambda: ''
@@ -73,7 +84,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
         filename = data['url'] if stream else ytdl.prepare_filename(data)
         return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
 
-class Music(commands.Cog):
+class Sounds(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 
@@ -162,6 +173,15 @@ class Music(commands.Cog):
 	async def bwah(self, ctx):
 		await self.playsound(ctx, bwahURL)
 
+	@commands.command(name="aliases")
+	async def printaliases(self, ctx):
+		msg = "Aliases:\n"
+		for cmd in commandRefDict:
+			msg += "~{command}\n\t{aliasarray}\n".format(command = cmd, aliasarray=commandRefDict[cmd])
+		
+		await ctx.send(msg)
+
+
 bot = commands.Bot(command_prefix = commands.when_mentioned_or("~"), description = 'Plays cool sounds, puhi', case_insensitive=True)
 
 
@@ -170,5 +190,5 @@ async def on_ready():
 	print('Logged in as {0} ({0.id})'.format(bot.user))
 	print('-------')
 
-bot.add_cog(Music(bot))
+bot.add_cog(Sounds(bot))
 bot.run(os.getenv('botkey'))
