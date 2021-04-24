@@ -18,8 +18,8 @@ beatdumbassAlias = ["dumbass"]
 bwahAlias = ["daisukenojobito"]
 susAlias = ["amongus", "mungus"]
 pickitupphonesAlias = ["imthere"]
-ohnoAlias = ["ohno", "knuckles"]
-fredweezerAlias = ["fredweezer", "weezer"]
+ohnoAlias = ["knuckles"]
+fredweezerAlias = ["weezer"]
 
 # Sound urls
 squidwardDaBabyURL = "https://youtu.be/fzhDGZD44hE"
@@ -200,7 +200,7 @@ class Sounds(commands.Cog):
 		await self.playsound(ctx, ohnoURL)
     
 	@commands.command(aliases=fredweezerAlias)
-	async def pickitupphones(self, ctx):
+	async def fredweezer(self, ctx):
 		await self.playsound(ctx, fredweezerURL)
 
 #	TEMPLATE
