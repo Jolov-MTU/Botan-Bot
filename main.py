@@ -13,11 +13,12 @@ havefunnekuAlias = ["havefun"]
 joshuaRIPAlias = ["rip", "restinpeace", "joshuarestinpeace"]
 outofyourvectorAlias = ["youreoutofyourvector", "outofvector", "vector"]
 sincostanAlias = ["sinecosinetangent"]
-sozettaslowAlias = ["zettaslow"]
+sozettaslowAlias = ["zettaslow", "slow"]
 beatdumbassAlias = ["dumbass"]
 bwahAlias = ["daisukenojobito"]
 susAlias = ["amongus", "mungus"]
 pickitupphonesAlias = ["imthere"]
+fredweezerAlias = ["fredweezer", "weezer"]
 
 # Sound urls
 squidwardDaBabyURL = "https://youtu.be/fzhDGZD44hE"
@@ -30,6 +31,8 @@ beatdumbassURL = "https://youtu.be/jUkUDgpIRJc"
 bwahURL = "https://youtu.be/pvkx4HIvEyU"
 susURL = "https://youtu.be/b7p3Of5AmOc"
 pickitupphonesURL = "https://youtu.be/siSjOxHPlOg"
+fredweezerURL = "https://youtu.be/BDjd30CklLo"
+
 
 # Command Reference DB
 commandRefDict = {
@@ -42,7 +45,8 @@ commandRefDict = {
 	"beatdumbass" : beatdumbassAlias,
 	"bwah" : bwahAlias,
 	"sus" : susAlias,
-	"pickitupphones" : pickitupphonesAlias
+	"pickitupphones" : pickitupphonesAlias,
+	"fredweezer" : fredweezerAlias
 	#"soundName" : soundNameAlias
 }
 
@@ -188,6 +192,10 @@ class Sounds(commands.Cog):
 	@commands.command(aliases=pickitupphonesAlias)
 	async def pickitupphones(self, ctx):
 		await self.playsound(ctx, pickitupphonesURL)
+
+	@commands.command(aliases=fredweezerAlias)
+	async def pickitupphones(self, ctx):
+		await self.playsound(ctx, fredweezerURL)
 
 #	TEMPLATE
 #	@commands.command(aliases=soundNameAlias)
