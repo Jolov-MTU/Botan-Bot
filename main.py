@@ -18,6 +18,7 @@ beatdumbassAlias = ["dumbass"]
 bwahAlias = ["daisukenojobito"]
 susAlias = ["amongus", "mungus"]
 pickitupphonesAlias = ["imthere"]
+ohnoAlias = ["ohno", "knuckles"]
 fredweezerAlias = ["fredweezer", "weezer"]
 
 # Sound urls
@@ -31,8 +32,8 @@ beatdumbassURL = "https://youtu.be/jUkUDgpIRJc"
 bwahURL = "https://youtu.be/pvkx4HIvEyU"
 susURL = "https://youtu.be/b7p3Of5AmOc"
 pickitupphonesURL = "https://youtu.be/siSjOxHPlOg"
+ohnoURL = "https://youtu.be/kkDMz2ml0gw"
 fredweezerURL = "https://youtu.be/BDjd30CklLo"
-
 
 # Command Reference DB
 commandRefDict = {
@@ -46,6 +47,7 @@ commandRefDict = {
 	"bwah" : bwahAlias,
 	"sus" : susAlias,
 	"pickitupphones" : pickitupphonesAlias,
+	"ohno" : ohnoAlias,
 	"fredweezer" : fredweezerAlias
 	#"soundName" : soundNameAlias
 }
@@ -193,6 +195,10 @@ class Sounds(commands.Cog):
 	async def pickitupphones(self, ctx):
 		await self.playsound(ctx, pickitupphonesURL)
 
+	@commands.command(aliases=ohnoAlias)
+	async def ohno(self, ctx):
+		await self.playsound(ctx, ohnoURL)
+    
 	@commands.command(aliases=fredweezerAlias)
 	async def pickitupphones(self, ctx):
 		await self.playsound(ctx, fredweezerURL)
