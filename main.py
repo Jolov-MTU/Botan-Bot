@@ -41,6 +41,8 @@ commandRefDict = {
 	"sozettaslow" : sozettaslowAlias,
 	"beatdumbass" : beatdumbassAlias,
 	"bwah" : bwahAlias,
+	"sus" : susAlias,
+	"pickitupphones" : pickitupphonesAlias
 	#"soundName" : soundNameAlias
 }
 
