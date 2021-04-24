@@ -21,8 +21,9 @@ pickitupphonesAlias = ["imthere"]
 ohnoAlias = ["knuckles"]
 fredweezerAlias = ["weezer"]
 sokonokiryuchanAlias = ["kiryuchan", "kiryu", "majima"]
-soopahAlias = ["soopah", "supermario", "gameoftheyear"]
-damedaneAlias = ["damedane", "dameyo", "sukide", "sadge"]
+soopahAlias = ["supermario", "gameoftheyear"]
+damedaneAlias = ["dameyo", "sukide", "sadge"]
+dubebeAlias = ["dababyfrench", "frenchdababy", "dubaby", "dabebe"]
 
 # Sound urls
 squidwardDaBabyURL = "https://youtu.be/fzhDGZD44hE"
@@ -40,6 +41,7 @@ fredweezerURL = "https://youtu.be/BDjd30CklLo"
 sokonokiryuchanURL = "https://youtu.be/NgJv2eWR05I"
 soopahURL = "https://youtu.be/F7-YPCsHvSg"
 damedaneURL = "https://youtu.be/en0eq8bd-G0"
+dubebeURL = "https://youtu.be/AyWeqEdnFYg"
 
 # Command Reference DB
 commandRefDict = {
@@ -55,9 +57,9 @@ commandRefDict = {
 	"pickitupphones" : pickitupphonesAlias,
 	"ohno" : ohnoAlias,
 	"fredweezer" : fredweezerAlias,
-  "sokonokiryuchan" : sokonokiryuchanAlias,
-  "soopah" : soopahAlias,
-  "damedane" : damedaneAlias
+  	"sokonokiryuchan" : sokonokiryuchanAlias,
+  	"soopah" : soopahAlias,
+  	"damedane" : damedaneAlias
 	#"soundName" : soundNameAlias
 }
 
@@ -212,17 +214,21 @@ class Sounds(commands.Cog):
 	async def fredweezer(self, ctx):
 		await self.playsound(ctx, fredweezerURL)
 
-@commands.command(aliases=sokonokiryuchanAlias)
+	@commands.command(aliases=sokonokiryuchanAlias)
 	async def sokonokiryuchan(self, ctx):
 		await self.playsound(ctx, sokonokiryuchanURL)
 
-@commands.command(aliases=soopahAlias)
+	@commands.command(aliases=soopahAlias)
 	async def soopah(self, ctx):
 		await self.playsound(ctx, soopahURL)
 
-@commands.command(aliases=damedaneAlias)
+	@commands.command(aliases=damedaneAlias)
 	async def damedane(self, ctx):
 		await self.playsound(ctx, damedaneURL)
+
+	@commands.command(aliases=dubebeAlias)
+	async def dubebe(self, ctx):
+		await self.playsound(ctx, dubebeURL)
 
 #	TEMPLATE
 #	@commands.command(aliases=soundNameAlias)
