@@ -8,6 +8,8 @@ from discord.ext import commands
 from serv import go_live
 from decouple import config
 
+# ALIASES CANNOT BE THE SAME AS NAMES - Keira
+
 # Command Aliases
 squidwardDaBabyAlias = ["squidbaby", "squidwardbaby", "dababy"]
 havefunnekuAlias = ["havefun"]
