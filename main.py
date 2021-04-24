@@ -7,6 +7,8 @@ import youtube_dl
 from discord.ext import commands
 from serv import go_live
 
+# ALIASES CANNOT BE THE SAME AS NAMES - Keira
+
 # Command Aliases
 squidwardDaBabyAlias = ["squidbaby", "squidwardbaby", "dababy"]
 havefunnekuAlias = ["havefun"]
