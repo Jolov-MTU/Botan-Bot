@@ -11,6 +11,7 @@ youtube-dl = "^2021.4.17"
 waiting = "^1.4.1"
 replit = "^3.0.0"
 flask = "^1.1.2"
+python-decouple = "^3.4"
 
 [tool.poetry.dev-dependencies]
 

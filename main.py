@@ -6,6 +6,7 @@ import youtube_dl
 
 from discord.ext import commands
 from serv import go_live
+from decouple import config
 
 # Command Aliases
 squidwardDaBabyAlias = ["squidbaby", "squidwardbaby", "dababy"]
@@ -24,6 +25,7 @@ sokonokiryuchanAlias = ["kiryuchan", "kiryu", "majima"]
 soopahAlias = ["supermario", "gameoftheyear"]
 damedaneAlias = ["dameyo", "sukide", "sadge"]
 dubebeAlias = ["dababyfrench", "frenchdababy", "dubaby", "dabebe"]
+kekwAlias = ["kek"]
 
 # Sound urls
 squidwardDaBabyURL = "https://youtu.be/fzhDGZD44hE"
@@ -42,6 +44,11 @@ sokonokiryuchanURL = "https://youtu.be/NgJv2eWR05I"
 soopahURL = "https://youtu.be/F7-YPCsHvSg"
 damedaneURL = "https://youtu.be/en0eq8bd-G0"
 dubebeURL = "https://youtu.be/AyWeqEdnFYg"
+
+# Local sound filenames
+ffmpegPath = "C:/Users/Jolo V/Desktop/Content Creation/discordbot/Botan-Bot/sounds/ffmpeg.exe"
+soundsFolder = "./sounds/"
+kekwFilename = "kekw.mp3"
 
 # Command Reference DB
 commandRefDict = {
@@ -166,6 +173,16 @@ class Sounds(commands.Cog):
 			await asyncio.sleep(1)
 		await ctx.voice_client.disconnect()
 
+	@commands.command()
+	async def playsound_local(self, ctx, query):
+		alreadyPlaying = await self.ensure_voice(ctx)
+		if(alreadyPlaying): pass
+		source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(soundsFolder+query))
+		ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
+		while(ctx.voice_client.is_playing()):
+			await asyncio.sleep(1)
+		await ctx.voice_client.disconnect()
+
 	@commands.command(aliases=squidwardDaBabyAlias)
 	async def squidwardDaBaby(self, ctx):
 		await self.playsound(ctx, squidwardDaBabyURL)
@@ -230,6 +247,10 @@ class Sounds(commands.Cog):
 	async def dubebe(self, ctx):
 		await self.playsound(ctx, dubebeURL)
 
+	@commands.command(aliases=kekwAlias)
+	async def kekw(self, ctx):
+		await self.playsound_local(ctx, kekwFilename)
+
 #	TEMPLATE
 #	@commands.command(aliases=soundNameAlias)
 #	async def soundName(self, ctx):
@@ -256,6 +277,6 @@ async def on_ready():
 	print('Logged in as {0} ({0.id})'.format(bot.user))
 	print('-------')
 
-go_live()
+#go_live()
 bot.add_cog(Sounds(bot))
-bot.run(os.getenv('botkey'))
+bot.run(config('botkey'))
