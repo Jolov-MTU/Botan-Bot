@@ -5,6 +5,7 @@ import asyncio
 import youtube_dl
 
 from discord.ext import commands
+from serv import go_live
 
 # Command Aliases
 squidwardDaBabyAlias = ["squidbaby", "squidwardbaby", "dababy"]
@@ -15,6 +16,8 @@ sincostanAlias = ["sinecosinetangent"]
 sozettaslowAlias = ["zettaslow"]
 beatdumbassAlias = ["dumbass"]
 bwahAlias = ["daisukenojobito"]
+susAlias = ["amongus", "mungus"]
+pickitupphonesAlias = ["imthere"]
 
 # Sound urls
 squidwardDaBabyURL = "https://youtu.be/fzhDGZD44hE"
@@ -25,6 +28,8 @@ sincostanURL = "https://youtu.be/BTABSE7kP8o"
 sozettaslowURL = "https://youtu.be/daZcE-4mprk"
 beatdumbassURL = "https://youtu.be/jUkUDgpIRJc"
 bwahURL = "https://youtu.be/pvkx4HIvEyU"
+susURL = "https://youtu.be/b7p3Of5AmOc"
+pickitupphonesURL = "https://youtu.be/siSjOxHPlOg"
 
 # Command Reference DB
 commandRefDict = {
@@ -35,7 +40,8 @@ commandRefDict = {
 	"sincostan" : sincostanAlias,
 	"sozettaslow" : sozettaslowAlias,
 	"beatdumbass" : beatdumbassAlias,
-	"bwah" : bwahAlias
+	"bwah" : bwahAlias,
+	#"soundName" : soundNameAlias
 }
 
 # Suppress noise about console usage from errors
@@ -173,6 +179,23 @@ class Sounds(commands.Cog):
 	async def bwah(self, ctx):
 		await self.playsound(ctx, bwahURL)
 
+	@commands.command(aliases=susAlias)
+	async def sus(self, ctx):
+		await self.playsound(ctx, susURL)
+
+	@commands.command(aliases=pickitupphonesAlias)
+	async def pickitupphones(self, ctx):
+		await self.playsound(ctx, pickitupphonesURL)
+
+#	TEMPLATE
+#	@commands.command(aliases=soundNameAlias)
+#	async def soundName(self, ctx):
+#		await self.playsound(ctx, soundNameURL)
+
+	#########################################
+	### Sounds go before here :)
+	#########################################
+
 	@commands.command(name="aliases")
 	async def printaliases(self, ctx):
 		msg = "Aliases:\n"
@@ -190,5 +213,6 @@ async def on_ready():
 	print('Logged in as {0} ({0.id})'.format(bot.user))
 	print('-------')
 
+go_live()
 bot.add_cog(Sounds(bot))
 bot.run(os.getenv('botkey'))
