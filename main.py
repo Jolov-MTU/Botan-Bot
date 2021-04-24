@@ -177,7 +177,7 @@ class Sounds(commands.Cog):
 	async def playsound_local(self, ctx, query):
 		alreadyPlaying = await self.ensure_voice(ctx)
 		if(alreadyPlaying): pass
-		source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio("kekw"))
+		source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(soundsFolder+query))
 		ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
 		while(ctx.voice_client.is_playing()):
 			await asyncio.sleep(1)
