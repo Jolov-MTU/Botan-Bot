@@ -69,6 +69,8 @@ commandRefDict = {
   	"sokonokiryuchan" : sokonokiryuchanAlias,
   	"soopah" : soopahAlias,
   	"damedane" : damedaneAlias
+	"dubebe" : dubebeAlias
+	"kekw" : kekwAlias
 	#"soundName" : soundNameAlias
 }
 
@@ -169,26 +171,20 @@ class Sounds(commands.Cog):
 
 		await ctx.voice_client.disconnect()
 
-	async def playsound(self, ctx, url = str, *volumeMultiplier = 1.0):
-		currentVolume = ctx.voice_client.volume
-		ctx.voice_client.volume = volumeMultiplier*currentVolume	# TODO: this may cause a bug when running ~stop before the volume is reset
+	async def playsound(self, ctx, url = str):
 		await ctx.invoke(self.bot.get_command('stream'), url = url)
 		while(ctx.voice_client.is_playing()):
 			await asyncio.sleep(1)
-		ctx.voice_client.volume = currentVolume
 		await ctx.voice_client.disconnect()
 
 	@commands.command()
-	async def playsound_local(self, ctx, query, *volumeMultiplier = 1.0):
+	async def playsound_local(self, ctx, query):
 		alreadyPlaying = await self.ensure_voice(ctx)
 		if(alreadyPlaying): pass
-		currentVolume = ctx.voice_client.volume
-		ctx.voice_client.volume = volumeMultiplier*currentVolume	# TODO: this may cause a bug when running ~stop before the volume is reset		
 		source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(soundsFolder+query))
 		ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
 		while(ctx.voice_client.is_playing()):
 			await asyncio.sleep(1)
-		ctx.voice_client.volume = currentVolume		
 		await ctx.voice_client.disconnect()
 
 	@commands.command(aliases=squidwardDaBabyAlias)
@@ -244,11 +240,11 @@ class Sounds(commands.Cog):
 		await self.playsound(ctx, sokonokiryuchanURL)
 
 	@commands.command(aliases=soopahAlias)
-	async def soopah(self, ctx, volumeMultiplier = 0.6):
+	async def soopah(self, ctx):
 		await self.playsound(ctx, soopahURL)
 
 	@commands.command(aliases=damedaneAlias)
-	async def damedane(self, ctx, volumeMultiplier = 0.6):
+	async def damedane(self, ctx):
 		await self.playsound(ctx, damedaneURL)
 
 	@commands.command(aliases=dubebeAlias)
