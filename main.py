@@ -28,6 +28,8 @@ soopahAlias = ["supermario", "gameoftheyear"]
 damedaneAlias = ["dameyo", "sukide", "sadge"]
 dubebeAlias = ["dababyfrench", "frenchdababy", "dubaby", "dabebe"]
 kekwAlias = ["kek"]
+michaeljacksoninthefreezerAlias = ["mjfreezer", "michael jackson", "mj"]
+rickrollAlias = ["nevergonnagiveyouup", "rickastley"]
 
 # Sound urls
 squidwardDaBabyURL = "https://youtu.be/fzhDGZD44hE"
@@ -51,6 +53,8 @@ dubebeURL = "https://youtu.be/AyWeqEdnFYg"
 ffmpegPath = "C:/Users/Jolo V/Desktop/Content Creation/discordbot/Botan-Bot/sounds/ffmpeg.exe"
 soundsFolder = "./sounds/"
 kekwFilename = "kekw.mp3"
+michaeljacksoninthefreezerFilename = "michaeljacksoninthefreezer.mp3"
+rickrollFilename = "rickroll.mp3"
 
 # Command Reference DB
 commandRefDict = {
@@ -254,6 +258,14 @@ class Sounds(commands.Cog):
 	@commands.command(aliases=kekwAlias)
 	async def kekw(self, ctx):
 		await self.playsound_local(ctx, kekwFilename)
+
+	@commands.command(aliases=rickrollAlias)
+	async def rickroll(self, ctx):
+		await self.playsound_local(ctx, rickrollFilename)
+
+	@commands.command(aliases=michaeljacksoninthefreezerAlias)
+	async def michaeljacksoninthefreezer(self, ctx):
+		await self.playsound_local(ctx, michaeljacksoninthefreezerFilename)
 
 #	TEMPLATE
 #	@commands.command(aliases=soundNameAlias)
