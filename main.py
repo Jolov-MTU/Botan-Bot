@@ -68,8 +68,8 @@ commandRefDict = {
 	"fredweezer" : fredweezerAlias,
   	"sokonokiryuchan" : sokonokiryuchanAlias,
   	"soopah" : soopahAlias,
-  	"damedane" : damedaneAlias
-	"dubebe" : dubebeAlias
+  	"damedane" : damedaneAlias,
+	"dubebe" : dubebeAlias,
 	"kekw" : kekwAlias
 	#"soundName" : soundNameAlias
 }
